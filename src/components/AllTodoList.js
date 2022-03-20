@@ -18,7 +18,7 @@ export default function AllTodoList () {
             </div>
             <ul>
                 {list.map(item => 
-                    <li key={item.id}>{item.text}</li>)
+                    <li key={item.id}>{item.text}z</li>)
                 }
             </ul>
         </section>
