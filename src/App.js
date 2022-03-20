@@ -10,3 +10,6 @@ function App() {
 }
 
 export default App;
+
+
+// npx create-react-app my-app --template redux 비교하기
