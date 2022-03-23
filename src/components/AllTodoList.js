@@ -19,7 +19,7 @@ export default function AllTodoList () {
             <h1>할 일 목록</h1>
             <div>
                 <input type="text" ref={inputRef}/>
-                <button onClick={createTodoItem}>확인</button>
+                <button type="primary" onClick={createTodoItem}>확인</button>
             </div>
             <ul>
                 {list.map(item => 
