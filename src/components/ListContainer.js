@@ -1,13 +1,11 @@
 import AllTodoList from './AllTodoList';
 import DoneList from './DoneList';
-import BackgroundImg from './backgroundImg/BackgroundImg';
+import BackgroundArea from './backgroundArea/BackgroundArea';
 
 export default function ListContainer() {
     return (
         <div>
-            <AllTodoList />
-            <DoneList />
-            <BackgroundImg />
+            <BackgroundArea />
         </div>
     )
 }
