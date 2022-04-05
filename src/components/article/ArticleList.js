@@ -1,6 +1,7 @@
 
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from 'antd';
 
 import { goToWriteArticle, goToListArticle, goToUpdateArticle } from '../../store/modules/article';
 import ArticleListTable from './ArticleListTable';
@@ -32,8 +33,8 @@ export default function ArticleList () {
         <section>
             <h1>게시글</h1>
             <div>
-                <button type='primary' onClick={goToArticleWritePage}>글쓰기</button>
-                <button type='primary' onClick={goToArticleListPage}>게시글 목록 보기</button>
+                <Button onClick={() => goToArticleWritePage()}>글쓰기 페이지</Button>
+                <Button onClick={() => goToArticleListPage()}>게시글 목록 보기</Button>
             </div>
             {articlePage === 'list'}
             {showPage(articlePage)}

@@ -5,7 +5,7 @@ import { Table, Tag, Space } from 'antd';
 import 'antd/dist/antd.css';
 
 import { writeArticle, updateArticle, deleteArticle } from '../../store/modules/article';
-import './ArticleListTable.css';
+import './Article.css';
 
 const columns = [
     {
@@ -34,7 +34,6 @@ export default function ArticleListTable () {
     let articleList = useSelector((state) => state.article.articleList).filter(
         (article) => article.delState === false
     );
-    console.log('articleList : ', articleList);
     articleList = articleList.reduce( (acc, data) => {
         acc.result.push({
             ...data,
@@ -42,7 +41,6 @@ export default function ArticleListTable () {
         })
         return acc;
     }, { result: [] }).result;
-    console.log('articleList : ', articleList);
 
     const inputRef = useRef();
     const dispatch = useDispatch();
