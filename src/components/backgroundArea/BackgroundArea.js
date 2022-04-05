@@ -10,8 +10,6 @@ export default function BackgroundArea () {
     return (
         <section>
             <div id="testId">
-                <AllTodoList/>
-                <DoneList/>
                 <ArticleList/>
             </div>
         </section>

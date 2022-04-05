@@ -12,12 +12,13 @@ export function writeArticle (payload) {
     };
 }
 
-export function updateArticle (seq, title, content) {
+export function updateArticle (seq, title, content, writer) {
     return {
         type: UPDATE,
         seq,
         title,
         content,
+        writer,
     };
 }
 
@@ -35,18 +36,21 @@ const initState = {
             seq: 0,
             title: '제목0',
             content: '내용0',
+            writer: '작성자0',
             delState: false,
         },
         {
             seq: 1,
             title: '제목1',
             content: '내용1',
+            writer: '작성자1',
             delState: false,
         },
         {
             seq: 2,
             title: '제목2',
             content: '내용2',
+            writer: '작성자2',
             delState: true,
         },
     ],
@@ -62,6 +66,7 @@ export default function article (state = initState, action) {
                     seq: action.payload.seq,
                     title: action.payload.title,
                     content: action.payload.content,
+                    writer: action.payload.writer,
                     delState: false,
                 })
             };
@@ -74,6 +79,7 @@ export default function article (state = initState, action) {
                         seq: action.payload.seq,
                         title: action.payload.title,
                         content: action.payload.content,
+                        writer: action.payload.writer,
                         delState: false,
                     } :
                     article;

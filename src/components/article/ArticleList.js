@@ -1,7 +1,9 @@
 
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { writeArticle, updateArticle, deleteArticle } from '../../store/modules/article';
+import ArticleListTable from './ArticleListTable';
 
 export default function ArticleList () {
     const articleList = useSelector((state) => state.article.articleList).filter(
@@ -15,6 +17,7 @@ export default function ArticleList () {
             seq: '3',
             title: 'test',
             content: 'test',
+            writer: '작성자test',
             delState: false
         }));
     }
@@ -30,9 +33,11 @@ export default function ArticleList () {
                     <li key={article.seq}>
                         <span>{article.title}</span>
                         <span>{article.content}</span>
+                        <span>{article.writer}</span>
                     </li>
                 )}
             </ul>
+            <ArticleListTable/>
         </section>
     )
 }
