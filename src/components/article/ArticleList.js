@@ -2,42 +2,41 @@
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { writeArticle, updateArticle, deleteArticle } from '../../store/modules/article';
+import { goToWriteArticle, goToListArticle, goToUpdateArticle } from '../../store/modules/article';
 import ArticleListTable from './ArticleListTable';
+import ArticleWrite from './ArticleWrite';
+
+function showPage (articlePage) {
+    switch(articlePage) {
+        case 'list':
+            return <ArticleListTable/>;
+        case 'write':
+            return <ArticleWrite/>;
+    }
+}
 
 export default function ArticleList () {
-    const articleList = useSelector((state) => state.article.articleList).filter(
-        (article) => article.delState === false
-    );
+    const articlePage = useSelector((state) => state.article.articlePage);
     const inputRef = useRef();
     const dispatch = useDispatch();
 
-    const writeNewArticle = () => {
-        return dispatch(writeArticle({
-            seq: '3',
-            title: 'test',
-            content: 'test',
-            writer: '작성자test',
-            delState: false
-        }));
+    const goToArticleWritePage = () => {
+        return dispatch(goToWriteArticle());
+    }
+
+    const goToArticleListPage = () => {
+        return dispatch(goToListArticle());
     }
 
     return (
         <section>
             <h1>게시글</h1>
             <div>
-                <button type='primary' onClick={writeNewArticle}>테스트 글쓰기</button>
+                <button type='primary' onClick={goToArticleWritePage}>글쓰기</button>
+                <button type='primary' onClick={goToArticleListPage}>게시글 목록 보기</button>
             </div>
-            <ul>
-                {articleList.map(article =>
-                    <li key={article.seq}>
-                        <span>{article.title}</span>
-                        <span>{article.content}</span>
-                        <span>{article.writer}</span>
-                    </li>
-                )}
-            </ul>
-            <ArticleListTable/>
+            {articlePage === 'list'}
+            {showPage(articlePage)}
         </section>
     )
 }

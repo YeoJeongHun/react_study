@@ -1,8 +1,11 @@
 
 
-const WRITE = 'article/WRITE';      //게시글 쓰기
-const UPDATE = 'article/UPDATE';    //게시글 수정
-const DELETE = 'article/DELETE';    //게시글 삭제
+const LIST_PAGE = 'article/LIST_PAGE'       //게시글 리스트 페이지 이동
+const WRITE = 'article/WRITE';              //게시글 쓰기
+const WRITE_PAGE = 'article/WRITE_PAGE'     //게시글 쓰기 페이지 이동
+const UPDATE = 'article/UPDATE';            //게시글 수정
+const UPDATE_PAGE = 'article/UPDATE_PAGE'   //게시글 수정 페이지 이동
+const DELETE = 'article/DELETE';            //게시글 삭제
 
 // 액션 함수
 export function writeArticle (payload) {
@@ -11,7 +14,6 @@ export function writeArticle (payload) {
         payload,
     };
 }
-
 export function updateArticle (seq, title, content, writer) {
     return {
         type: UPDATE,
@@ -21,11 +23,28 @@ export function updateArticle (seq, title, content, writer) {
         writer,
     };
 }
-
 export function deleteArticle (seq) {
     return {
         type: DELETE,
         seq,
+    };
+}
+export function goToListArticle (payload) {
+    return {
+        type: LIST_PAGE,
+        payload,
+    };
+}
+export function goToWriteArticle (payload) {
+    return {
+        type: WRITE_PAGE,
+        payload,
+    };
+}
+export function goToUpdateArticle (payload) {
+    return {
+        type: UPDATE_PAGE,
+        payload,
     };
 }
 
@@ -54,6 +73,7 @@ const initState = {
             delState: true,
         },
     ],
+    articlePage: 'list',            // list, write, detail, update
 }
 
 // 리듀서
@@ -92,6 +112,22 @@ export default function article (state = initState, action) {
                     return article.seq === action.seq ? {...article, delState: true} : article;
                 })
             }
+        case LIST_PAGE:
+            return {
+                ...state,
+                articlePage: 'list'
+            }
+        case WRITE_PAGE:
+            return {
+                ...state,
+                articlePage: 'write'
+            }
+        case UPDATE_PAGE:
+            return {
+                ...state,
+                articlePage: 'update'
+            }
+
         default:
             return state;
     }

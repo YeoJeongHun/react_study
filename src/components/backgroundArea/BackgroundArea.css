@@ -1,7 +1,13 @@
 
-#testId{
+#main{
+    width: 100%;
+    background-color: #ccc;
+}
+
+
+#articleArea{
     margin: auto;
     width: 80%;
     height: 1300px;
-    background-color: #eee;
+    background-color: #ddd;
 }

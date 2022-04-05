@@ -9,8 +9,10 @@ export default function BackgroundArea () {
 
     return (
         <section>
-            <div id="testId">
-                <ArticleList/>
+            <div id='main'>
+                <div id="articleArea">
+                    <ArticleList/>
+                </div>
             </div>
         </section>
     )

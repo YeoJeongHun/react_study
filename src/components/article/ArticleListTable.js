@@ -5,6 +5,7 @@ import { Table, Tag, Space } from 'antd';
 import 'antd/dist/antd.css';
 
 import { writeArticle, updateArticle, deleteArticle } from '../../store/modules/article';
+import './ArticleListTable.css';
 
 const columns = [
     {
@@ -57,8 +58,8 @@ export default function ArticleListTable () {
     }
 
     return (
-        <div>
-            <Table columns={columns} dataSource={articleList} />
+        <div id='articleListTableArea'>
+            <Table bordered pagination={{ pageSize: 10 }} columns={columns} dataSource={articleList} />
         </div>
     )
 }
