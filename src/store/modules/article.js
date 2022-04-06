@@ -15,13 +15,10 @@ export function writeArticle (payload) {
         payload,
     };
 }
-export function updateArticle (seq, title, content, writer) {
+export function updateArticle (payload) {
     return {
         type: UPDATE,
-        seq,
-        title,
-        content,
-        writer,
+        payload,
     };
 }
 export function deleteArticle (seq) {
@@ -102,7 +99,7 @@ export default function article (state = initState, action) {
             return {
                 ...state,
                 articleList: state.articleList.map(article => {
-                    return article.seq === action.seq ?
+                    return article.seq === action.payload.seq ?
                     {
                         seq: action.payload.seq,
                         title: action.payload.title,
@@ -133,7 +130,8 @@ export default function article (state = initState, action) {
         case UPDATE_PAGE:
             return {
                 ...state,
-                articlePage: 'update'
+                articlePage: 'update',
+                articleDetailSeq: action.payload.seq,
             }
         case DETAIL_PAGE:
             return {

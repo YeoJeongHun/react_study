@@ -7,6 +7,7 @@ import { goToWriteArticle, goToListArticle, goToUpdateArticle } from '../../stor
 import ArticleListTable from './ArticleListTable';
 import ArticleWrite from './ArticleWrite';
 import ArticleDetail from './ArticleDetail';
+import ArticleUpdate from './ArticleUpdate';
 
 function showPage (articlePage) {
     switch(articlePage) {
@@ -16,12 +17,13 @@ function showPage (articlePage) {
             return <ArticleWrite/>;
         case 'detail':
             return <ArticleDetail/>;
+        case 'update':
+            return <ArticleUpdate/>;
     }
 }
 
 export default function ArticleList () {
     const articlePage = useSelector((state) => state.article.articlePage);
-    const inputRef = useRef();
     const dispatch = useDispatch();
 
     const goToArticleWritePage = () => {

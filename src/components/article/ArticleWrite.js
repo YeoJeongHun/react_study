@@ -16,7 +16,6 @@ export default function ArticleWrite () {
         return acc;
     }, { maxSeq: 0 }).maxSeq + 1;
 
-    const inputRef = useRef();
     const dispatch = useDispatch();
     const [form] = Form.useForm();
 
@@ -50,7 +49,7 @@ export default function ArticleWrite () {
                     <Row>
                         <Col span={8}>
                             <FormItem label="내용" name="content" rules={[{ require: true, message: '내용을 입력 해주세요.'}]}>
-                                <TextArea rows={20} maxLength={1000} disabled={false} style={{ width: "350%", maxWidth: "350%" }} />
+                                <TextArea showCount={true} rows={20} maxLength={1000} disabled={false} style={{ width: "350%", maxWidth: "350%" }} />
                             </FormItem>
                         </Col>
                     </Row>

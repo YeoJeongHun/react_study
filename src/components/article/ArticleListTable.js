@@ -42,18 +42,7 @@ export default function ArticleListTable () {
         return acc;
     }, { result: [] }).result;
 
-    const inputRef = useRef();
     const dispatch = useDispatch();
-
-    const writeNewArticle = () => {
-        return dispatch(writeArticle({
-            seq: '3',
-            title: 'test',
-            content: 'test',
-            writer: '작성자test',
-            delState: false
-        }));
-    }
 
     const goToArticleDetailPage = (seq) => {
         return dispatch(goToDetailArticle(seq));
