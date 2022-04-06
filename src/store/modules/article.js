@@ -6,6 +6,7 @@ const WRITE_PAGE = 'article/WRITE_PAGE'     //게시글 쓰기 페이지 이동
 const UPDATE = 'article/UPDATE';            //게시글 수정
 const UPDATE_PAGE = 'article/UPDATE_PAGE'   //게시글 수정 페이지 이동
 const DELETE = 'article/DELETE';            //게시글 삭제
+const DETAIL_PAGE = 'article/DETAIL_PAGE'   //게시글 상세보기 페이지 이동
 
 // 액션 함수
 export function writeArticle (payload) {
@@ -47,6 +48,12 @@ export function goToUpdateArticle (payload) {
         payload,
     };
 }
+export function goToDetailArticle (payload) {
+    return {
+        type: DETAIL_PAGE,
+        payload,
+    };
+}
 
 // 초기 상태
 const initState = {
@@ -74,6 +81,7 @@ const initState = {
         },
     ],
     articlePage: 'list',            // list, write, detail, update
+    articleDetailSeq: null,
 }
 
 // 리듀서
@@ -126,6 +134,12 @@ export default function article (state = initState, action) {
             return {
                 ...state,
                 articlePage: 'update'
+            }
+        case DETAIL_PAGE:
+            return {
+                ...state,
+                articlePage: 'detail',
+                articleDetailSeq: action.payload.seq,
             }
 
         default:

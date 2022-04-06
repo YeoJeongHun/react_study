@@ -6,6 +6,7 @@ import { Button } from 'antd';
 import { goToWriteArticle, goToListArticle, goToUpdateArticle } from '../../store/modules/article';
 import ArticleListTable from './ArticleListTable';
 import ArticleWrite from './ArticleWrite';
+import ArticleDetail from './ArticleDetail';
 
 function showPage (articlePage) {
     switch(articlePage) {
@@ -13,6 +14,8 @@ function showPage (articlePage) {
             return <ArticleListTable/>;
         case 'write':
             return <ArticleWrite/>;
+        case 'detail':
+            return <ArticleDetail/>;
     }
 }
 
