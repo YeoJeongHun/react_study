@@ -41,7 +41,7 @@ export default function ArticleList () {
         fetch('https://jsonplaceholder.typicode.com/todos/1').then((res) => {
             console.log('res : ', res);
         })
-        axios.get('https://jsonplaceholder.typicode.com/todos/1')
+        axios.get('http://localhost:9090/reactTest1')
         .then(function (response) {
             // handle success
             console.log(response);
