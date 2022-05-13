@@ -1,0 +1,29 @@
+
+/* .main{
+    background-color: #fff;
+    border: 1px solid black;
+} */
+
+
+.pallet{
+    margin: auto;
+    width: 280px;
+    border: 1px solid black;
+}
+
+.result_pallet{
+    margin: auto;
+    width: 28px;
+    height: 28px;
+    border: 1px solid black;
+}
+
+#answer_pallet{
+    margin: auto;
+}
+
+#answer_pallet_component {
+    margin: auto;
+    width: 190;
+    display: flex;
+}
