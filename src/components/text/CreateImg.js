@@ -6,11 +6,13 @@ import { Progress } from 'antd';
 const axios = require('axios');
 
 export default function CreateImg () {   
+    const [speakerType, setSpeakerType] = useState("item");
     const [imgList, setImgList] = useState([]);
     const [last5imgList, setLast5imgList] = useState([]);
     const [imgUrl, setImgUrl] = useState("http://localhost:4000/img/001");
 
     const keyDownFunction = (e) => {
+        console.log(e.code);
         if(e.key === '1') {
             setImgUrl("http://localhost:4000/img/001");
             setImgList([
@@ -54,22 +56,26 @@ export default function CreateImg () {
         }));
     }
 
-    const makeImgList = () => {
-        const return_arr = [];
-        for (let i = 0; i < 3; i++) {
-            return_arr.push(
-                <div>
-                    <img src={last5imgList[i].url} /> 결과 : {last5imgList[i].id}
-                </div>
-            )
-        }
-        return return_arr;
+    const backButton = () => {
+        setImgList(imgList.filter( (value, idx) => {if (idx != imgList.length-1) return value;}));
+        const tempImgList = imgList.slice().reverse();
+        setLast5imgList(tempImgList.filter( (value, idx) => {
+            if (idx < 6 && idx > 0)
+                return value;
+        }));
+    }
+
+    const typeCheck = (e) => {
+        console.log(e);
     }
 
     return (
         <section>
             <div>
                 --------------------------------------------------------------------------------------------------------------------------------------
+            </div>
+            <div>
+                <input type="checkbox" name={"item"} value={"item"} onChange={typeCheck()}/> item
             </div>
             <div className='main'>
                 <input type="text" id='text_area' onKeyDown={keyDownFunction} onKeyUp={keyUpFunction} maxLength={1} />
@@ -79,7 +85,7 @@ export default function CreateImg () {
                 --------------------------------------------------------------------------------------------------------------------------------------
             </div>
             <div>
-                <button>리셋</button>
+                <button onClick={backButton}>되돌리기</button>
             </div>
             <div>
                 {last5imgList.map( (imgData, idx) => (
