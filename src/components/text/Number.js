@@ -36,7 +36,7 @@ export default function Number () {
             ctx_resize.fill();
 
             ctx_resize.fillRect((e.clientX - rect.left)/10, (e.clientY - rect.top)/10, 1, 1);
-            // saveImg();
+            saveImg();
         }
     };
 

@@ -3,6 +3,7 @@
 const ARTICLE = 'article'       //게시글 페이지 이동
 const NUMBER = 'number'       //숫자인식 페이지 이동
 const HANGUL = 'hangul'       //한글인식 페이지 이동
+const CREATE_IMG = 'create_img' //문자 이미지 생성 페이지
 
 // 액션 함수
 export function openArticle (payload) {
@@ -20,6 +21,12 @@ export function openNumber (payload) {
 export function openHangul (payload) {
     return {
         type: HANGUL,
+        payload,
+    };
+}
+export function openCreateImg (payload) {
+    return {
+        type: CREATE_IMG,
         payload,
     };
 }
@@ -46,6 +53,11 @@ export default function mainStatus (state = initState, action) {
             return {
                 // ...state,
                 page: 'hangul',
+            };
+        case CREATE_IMG:
+            return {
+                // ...state,
+                page: 'create_img',
             };
 
         default:

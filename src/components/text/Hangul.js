@@ -8,6 +8,7 @@ export default function Hangul () {
     const canvas = useRef(null);
     const canvas_resize = useRef(null);
     
+    const [text, setText] = useState(undefined);
     const [answer, setAnswer] = useState(undefined);
     const [ctx, setCts] = useState(undefined);
     const [ctx_resize, setCts_resize] = useState(undefined);
@@ -26,7 +27,10 @@ export default function Hangul () {
             ctx.beginPath();
             ctx.arc(e.clientX - rect.left, e.clientY - rect.top, 15, 0, 7);
             ctx.fill();
-            ctx_resize.fillRect((e.clientX - rect.left)/10, (e.clientY - rect.top)/10, 1, 1);
+            // ctx_resize.fillRect((e.clientX - rect.left)/10, (e.clientY - rect.top)/10, 0, 7);
+            ctx_resize.beginPath();
+            ctx_resize.arc((e.clientX - rect.left)/10, (e.clientY - rect.top)/10, 1, 0, 7);
+            ctx_resize.fill();
         }
     };
 
@@ -36,7 +40,8 @@ export default function Hangul () {
         setAnswer(null);
     }
     const saveImg = () => {
-    	const canvas_img = document.getElementById("resize_img");
+    	// const canvas_img = document.getElementById("resize_img");
+    	const canvas_img = document.getElementById("canvas");
         let resize_data = canvas_img.getContext('2d');
         let resize_data_img = resize_data.getImageData(0,0,canvas_img.width, canvas_img.height);
         let img_arr = resize_data_img.data;
@@ -44,26 +49,35 @@ export default function Hangul () {
         let arr = []
         for(let i = 0; i< img_arr.length; i++) {
             if(i % 4 === 3) {
-                arr.push(255 - img_arr[i]);
+                arr.push(255-img_arr[i]);
             }
         }
 
-        console.log(img_arr);
-        console.log(img_arr.length);
-        console.log(arr.length);
+        // console.log(img_arr);
+        // console.log(img_arr.length);
+        // console.log(arr.length);
 
         const req_data = {'arr' : arr};
         const api = axios.create({
-            timeout: 10000,
+            timeout: 100000,
             baseUrl: 'http://localhost:5000',
         })
-        api.post('/api/hangul', req_data)
+        api.post('/api/hangul95', req_data)
         .then(function (response) {
             setAnswer(response.data.result);
         })
         .catch(function (error) {
             console.log(error);
         })
+    }
+
+    const text2img = () => {
+    	ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
+    	ctx_resize.clearRect(0, 0, canvas_resize.current.width, canvas.current.height);
+        ctx.font = '256px Gulim';
+        ctx.fillText(text, 30, 230);
+        ctx_resize.font = '25px serif';
+        ctx_resize.fillText(text, 3, 24);
     }
 
     const Demo = () => (
@@ -78,6 +92,7 @@ export default function Hangul () {
                 --------------------------------------------------------------------------------------------------------------------------------------
             </div>
             <div className='main'>
+                <input type="text" id='text_area' onChange={(e) => setText(e.target.value)} maxLength={1} />
                 <div className='pallet'>
                     <canvas
                         id='canvas'
@@ -90,6 +105,7 @@ export default function Hangul () {
                         }}
                         onMouseUp={e => {
                             setIstMouseDown(false);
+                            saveImg();
                         }}
                     />
                 </div>
@@ -110,6 +126,7 @@ export default function Hangul () {
             </div>
             <div>
                 <button onClick={handleReset}>리셋</button>
+                <button onClick={text2img}>그리기</button>
                 <button onClick={saveImg}>검증</button>
             </div>
         </section>
